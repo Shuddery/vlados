@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shiporder orderid="889923"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="sequence.xsd">
+   <item1>
+      <title>Participate</title>
+      <name>Enter your name/name>
+      <email>Enter your email</email>
+      <message>Add your message</message>
+   </item1>
+   <nav>
+      <nav1>About</nav1>
+      <nav2>Contact</nav2>
+      <nav3>Faq</nav3>
+   </nav>
+   <ref>
+      <title>Go to get more information</title>
+   </ref>
+</shiporder>
