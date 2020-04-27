@@ -1,0 +1,171 @@
+swagger: "2.0"
+info:
+  version: "0.0.4"
+  title: FP Order service
+# during dev, should point to your local machine
+host: localhost:10011
+# basePath prefixes all resource paths 
+basePath: /api/v1
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+  - application/xml
+paths:
+  /items:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: items
+    get:
+      description: Participate
+      # used as the method name of the controller
+      operationId: listItems
+      parameters:
+        - name: spotId
+          in: query
+          description: Participate
+          required: false
+          type: string
+          description: Success
+          schema:
+            type: array
+            items:
+                $ref: "#/definitions/items"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
+  /nav:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: nav
+    get:
+      description: Nav for site
+      # used as the method name of the controller
+      operationId: listNav
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+                $ref: "#/definitions/TeaType"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /ref:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: ref
+    get:
+      description: ref for site
+      # used as the method name of the controller
+      operationId: listRef
+      parameters:
+        - name: Go to get more information
+          in: query
+          description: Button
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+                $ref: "#/definitions/TeaSpot"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+
+                      
+                    
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"        
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  Ref:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      geo:
+        type: string
+      photo:
+        type: string
+      teaTypes:
+        type: array
+        description: items for register
+        items:
+          type: string
+  Items:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      takeOffId:
+        type: number
+      teaType:
+        type: string
+      time:
+        type: string
+      status:
+        description: queue | ready | taken
+        type: string
+       
+  Nav:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        
+  Ref:
+    xml: 
+      name : Ref
+    properties:
+      order:
+        type: string
+      date:
+        type: string
+        xml:
+          attribute: true
+      product:
+        type: string
+        xml:
+          attribute: true
+      category:
+        type: string
+        xml:
+          attribute: true
+        
+        
+        
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
